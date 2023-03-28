@@ -4,12 +4,12 @@
 typedef struct Types {
 
         char type;
-        void (*func)(va_list *);
+        void (*func)(va_list *, unsigned int *);
 } types;
 int _putchar(char c);
 int _printf(const char *format, ...);
-void c_id(char c);
-void s_id(char *s);
-void d_id(int n);
+void c_id(va_list *p, unsigned int *count);
+void s_id(va_list *p, unsigned int *count);
+void d_id(va_list *p, unsigned int *count);
 
 #endif
