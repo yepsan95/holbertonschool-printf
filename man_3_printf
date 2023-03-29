@@ -1,0 +1,52 @@
+_PRINTF                                       Bryan's Manual
+
+NAME
+       _printf
+
+SYNOPSIS
+       #include "main.c"
+
+       int _printf(const char *format, ...);
+
+
+DESCRIPTION
+       The _printf function prints format strings and its variables (if any) to standard output.
+
+   Format of the format string
+       To format a string and include different variables in it, the _printf function include specifier characters
+       to be replaced by the desired variable. The specifier characters start with a '%' symbol, followed by the 
+       characters that correspond to the variable type. The syntax is the following:
+
+           _printf("%d", num);
+	
+       The order of the specifiers in the format string correspond to the order of the variables in the function.
+
+	   int n1 = 02;
+	   int n2 = 04;
+	   int n3 = 2023;
+
+           _printf("%d - %d - %d", n1, n2, n3);
+	           /*1    2    3 -> 1   2   3*/
+	  
+	  output: 10 - 20 - 2023
+	
+       The specifiers can be combined with regular characters in any order we want.
+
+	   char a = '#';
+           char b = 'C'
+	   int c = 20;
+
+       	   _printf("%c%c-%d is the best!\n", a, b, c);
+
+	   output: #C-20 is the best!
+
+
+   Conversion specifiers
+       A character that specifies the type of conversion to be applied.  The conversion specifiers and their meanings
+       are:
+
+       d, i   For int arguments. It is converted to signed decimal notation.
+
+       c      For char arguments.
+
+       s      For char * arguments (strings).
