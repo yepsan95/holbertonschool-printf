@@ -85,3 +85,43 @@ void d_id(va_list *p, unsigned int *count)
 		*(count) = *(count) + 1;
 	}
 }
+
+/**
+ * b_id - prints an unsigned int argument in binary
+ * @p: pointer to variable
+ * @count: counts the number of characters printed
+ *
+ * Return: void
+ */
+void b_id(va_list *p, unsigned int *count)
+{
+	unsigned int b, i;
+	char *buffer;
+	int len;
+
+	b = va_arg(*(p), unsigned int);
+	i = b;
+	len = 0;
+
+	while (i != 0)
+	{
+		i = i / 2;
+		len++;
+	}
+	buffer = (char *)malloc((len + 1) * sizeof(char));
+	if (buffer == NULL)
+		return;
+	buffer[len] = '\0';
+	while (b != 0)
+	{
+		len--;
+		buffer[len] = ((b % 2) + 48);
+		b = b / 2;
+	}
+	for (i = 0; buffer[i] != '\0'; i++)
+	{
+		_putchar(buffer[i]);
+		*(count) = *(count) + 1;
+	}
+	free(buffer);
+}
