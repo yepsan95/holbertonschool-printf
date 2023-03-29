@@ -18,6 +18,8 @@ int _printf(const char *format, ...)
 		{'d', d_id},
 		{'i', d_id},
 		{'b', b_id},
+		{'u', u_id},
+		{'o', o_id},
 		{'\0', NULL}
 		};
 
