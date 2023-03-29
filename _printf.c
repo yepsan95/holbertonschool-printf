@@ -17,6 +17,7 @@ int _printf(const char *format, ...)
 		{'s', s_id},
 		{'d', d_id},
 		{'i', d_id},
+		{'b', b_id},
 		{'\0', NULL}
 		};
 
