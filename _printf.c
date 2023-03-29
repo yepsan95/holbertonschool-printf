@@ -15,6 +15,8 @@ int _printf(const char *format, ...)
 	types type[] = {
 		{'c', c_id},
 		{'s', s_id},
+		{'d', d_id},
+		{'i', d_id},
 		{'\0', NULL}
 		};
 
