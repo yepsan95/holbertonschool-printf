@@ -2,8 +2,8 @@
 #include <stdarg.h>
 #include "main.h"
 /**
- * _printf - prints and formats strings and variables
- * @format: the format of the variables
+ * _printf - prints and formats strings and specifiers
+ * @format: the format of the string containing (or not) the variables
  *
  * Return: the number of characters printed
  */
@@ -22,21 +22,30 @@ int _printf(const char *format, ...)
 	count = 0;
         for (j = 0; format[j]; j++)
         {
-                for (k = 0; type[k].type != '\0'; k++)
-                {
-                        if (format[j] == '%' && format[j + 1] == type[k].type)
-                        {
-                                (*type[k].func)(&p, &count);
-                                if (format[j + 2] != '\0')
+		if (format[j]== '%')
+		{
+			if (format[j + 1] == '%')
+			{
+				_putchar('%');
+				count++;
+				j++;
+				continue;
+			}
+        	        for (k = 0; type[k].type != '\0'; k++)
+	                {
+				if (format[j + 1] == type[k].type)
 				{
-                                        _putchar(',');
-					count++;
-					_putchar(32);
-					count++;
+					(*type[k].func)(&p, &count);
+					j++;
+					break;
 				}
-                                break;
-                        }
-                }
+			}
+		}
+		else
+		{
+			_putchar(format[j]);
+			count++;
+		}
         }
         va_end(p);
 	return (count);
