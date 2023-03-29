@@ -12,5 +12,7 @@ void c_id(va_list *p, unsigned int *count);
 void s_id(va_list *p, unsigned int *count);
 void d_id(va_list *p, unsigned int *count);
 void b_id(va_list *p, unsigned int *count);
+void u_id(va_list *p, unsigned int *count);
+void o_id(va_list *p, unsigned int *count);
 
 #endif
