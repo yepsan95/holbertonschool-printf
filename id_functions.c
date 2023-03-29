@@ -21,7 +21,7 @@ void c_id(va_list *p, unsigned int *count)
 
 /**
  * s_id - prints a string variable
- * @s: string variable
+ * @p: pointer to variable
  * @count: counts the number of characters printed
  *
  * Return: void
@@ -42,7 +42,7 @@ void s_id(va_list *p, unsigned int *count)
 
 /**
  * d_id - prints an int variable
- * @n: int variable
+ * @p: pointer to variable
  * @count: counts the number of characters printed
  *
  * Return: void
@@ -56,7 +56,7 @@ void d_id(va_list *p, unsigned int *count)
 	if (n == 0)
 	{
 		_putchar(48);
-		*(count) = *(count) +1;
+		*(count) = *(count) + 1;
 	}
 	else if (n < 0)
 	{
