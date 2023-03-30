@@ -204,3 +204,99 @@ void o_id(va_list *p, unsigned int *count)
 	}
 	free(buffer);
 }
+
+/**
+ * x_id - prints an unsigned int argument in hexadecimal (abcdef in lower case)
+ * @p: pointer to variable
+ * @count: counts the number of characters printed
+ *
+ * Return: void
+ */
+void x_id(va_list *p, unsigned int *count)
+{
+	unsigned int x, i;
+	char *buffer;
+	int len;
+
+	x = va_arg(*(p), unsigned int);
+	i = x;
+	len = 0;
+
+	while (i != 0)
+	{
+		i = i / 16;
+		len++;
+	}
+	buffer = (char *)malloc((len + 1) * sizeof(char));
+	if (buffer == NULL)
+		return;
+	buffer[len] = '\0';
+	while (x != 0)
+	{
+		len--;
+		buffer[len] = ((x % 16) + 48);
+		x = x / 16;
+	}
+	for (i = 0; buffer[i] != '\0'; i++)
+	{
+		if (buffer[i] <= '9')
+		{
+			_putchar(buffer[i]);
+			*(count) = *(count) + 1;
+		}
+		else if (buffer[i] > '9')
+		{
+			_putchar(buffer[i] + 39);
+			*(count) = *(count) + 1;
+		}
+	}
+	free(buffer);
+}
+
+/**
+ * X_id - prints an unsigned int argument in hexadecimal (ABCDEF in upper case)
+ * @p: pointer to variable
+ * @count: counts the number of characters printed
+ *
+ * Return: void
+ */
+void X_id(va_list *p, unsigned int *count)
+{
+	unsigned int x, i;
+	char *buffer;
+	int len;
+
+	x = va_arg(*(p), unsigned int);
+	i = x;
+	len = 0;
+
+	while (i != 0)
+	{
+		i = i / 16;
+		len++;
+	}
+	buffer = (char *)malloc((len + 1) * sizeof(char));
+	if (buffer == NULL)
+		return;
+	buffer[len] = '\0';
+	while (x != 0)
+	{
+		len--;
+		buffer[len] = ((x % 16) + 48);
+		x = x / 16;
+	}
+	for (i = 0; buffer[i] != '\0'; i++)
+	{
+		if (buffer[i] <= '9')
+		{
+			_putchar(buffer[i]);
+			*(count) = *(count) + 1;
+		}
+		else if (buffer[i] > '9')
+		{
+			_putchar(buffer[i] + 7);
+			*(count) = *(count) + 1;
+		}
+	}
+	free(buffer);
+}
