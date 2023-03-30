@@ -20,6 +20,8 @@ int _printf(const char *format, ...)
 		{'b', b_id},
 		{'u', u_id},
 		{'o', o_id},
+		{'x', x_id},
+		{'X', X_id},
 		{'\0', NULL}
 		};
 
