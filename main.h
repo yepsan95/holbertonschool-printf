@@ -1,20 +1,28 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <unistd.h>
+
 typedef struct Types {
 
         char type;
-        void (*func)(va_list *, unsigned int *);
+        void (*func)(va_list *, char *, unsigned int *);
 } types;
 int _putchar(char c);
 int _printf(const char *format, ...);
-void c_id(va_list *p, unsigned int *count);
-void s_id(va_list *p, unsigned int *count);
-void d_id(va_list *p, unsigned int *count);
-void b_id(va_list *p, unsigned int *count);
-void u_id(va_list *p, unsigned int *count);
-void o_id(va_list *p, unsigned int *count);
-void x_id(va_list *p, unsigned int *count);
-void X_id(va_list *p, unsigned int *count);
+void clean_buffer(char *buffer, unsigned int i);
+
+void c_id(va_list *p, char *buffer, unsigned int *i);
+void s_id(va_list *p, char *buffer, unsigned int *i);
+void d_id(va_list *p, char *buffer, unsigned int *i);
+void b_id(va_list *p, char *buffer, unsigned int *i);
+void u_id(va_list *p, char *buffer, unsigned int *i);
+void o_id(va_list *p, char *buffer, unsigned int *i);
+void x_id(va_list *p, char *buffer, unsigned int *i);
+void X_id(va_list *p, char *buffer, unsigned int *i);
 
 #endif
