@@ -1,302 +1,286 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
 #include "main.h"
 
 /**
- * c_id - prints a char variable
+ * c_id - stores a char variable in a buffer
  * @p: pointer to variable
  * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
  *
  * Return: void
  */
-void c_id(va_list *p, unsigned int *count)
+void c_id(va_list *p, char *buffer, unsigned int *i)
 {
 	char c;
 
 	c = va_arg(*(p), int);
-	_putchar(c);
-	*(count) = *(count) + 1;
+	buffer[(*i)++] = c;
 }
 
 /**
- * s_id - prints a string variable
+ * s_id - stores a string variable in a buffer
  * @p: pointer to variable
  * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
  *
  * Return: void
  */
-void s_id(va_list *p, unsigned int *count)
+void s_id(va_list *p, char *buffer, unsigned int *i)
 {
-	int i;
+	int j;
 	char *s;
 
 	s = va_arg(*(p), char *);
 
-	for (i = 0; s[i] != '\0'; i++)
+	for (j = 0; s[j] != '\0'; j++)
 	{
-		_putchar(s[i]);
-		*(count) = *(count) + 1;
+		buffer[(*i)++] = s[j];
 	}
 }
 
 /**
- * d_id - prints an int variable
+ * d_id - stores an integer variable in a buffer
  * @p: pointer to variable
  * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
  *
  * Return: void
  */
-void d_id(va_list *p, unsigned int *count)
+void d_id(va_list *p, char *buffer, unsigned int *i)
 {
-	int n, i, j, size, digit;
+	int n, k, j, size, digit;
 
 	n = va_arg(*(p), int);
 
 	if (n == 0)
-	{
-		_putchar(48);
-		*(count) = *(count) + 1;
-	}
+		buffer[(*i)++] = '0';
 	else if (n < 0)
-	{
-		_putchar('-');
-		*(count) = *(count) + 1;
-	}
+		buffer[(*i)++] = '-';
 
 	size = 0;
-	i = n;
-	while (i != 0)
+	k = n;
+	while (k != 0)
 	{
-		i = i / 10;
+		k = k / 10;
 		size++;
 	}
-	for (i = size; i > 0; i--)
+	for (k = size; k > 0; k--)
 	{
 		digit = n;
-		for (j = i; j > 1; j--)
+		for (j = k; j > 1; j--)
 		{
 			digit = digit / 10;
 		}
 		digit = digit % 10;
 		if (digit < 0)
 			digit = digit * -1;
-		_putchar(digit + 48);
-		*(count) = *(count) + 1;
+		buffer[(*i)++] = digit + 48;
 	}
 }
 
 /**
- * b_id - prints an unsigned int argument in binary
+ * b_id - stores an unsigned int variable converted to binary in a buffer
  * @p: pointer to variable
  * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
  *
  * Return: void
  */
-void b_id(va_list *p, unsigned int *count)
+void b_id(va_list *p, char *buffer, unsigned int *i)
 {
-	unsigned int b, i;
-	char *buffer;
+	unsigned int b, j;
+	char *buf;
 	int len;
 
 	b = va_arg(*(p), unsigned int);
-	i = b;
+	j = b;
 	len = 0;
 
-	while (i != 0)
+	while (j != 0)
 	{
-		i = i / 2;
+		j = j / 2;
 		len++;
 	}
-	buffer = (char *)malloc((len + 1) * sizeof(char));
-	if (buffer == NULL)
+	buf = (char *)malloc((len + 1) * sizeof(char));
+	if (buf == NULL)
 		return;
-	buffer[len] = '\0';
+	buf[len] = '\0';
 	while (b != 0)
 	{
 		len--;
-		buffer[len] = ((b % 2) + 48);
+		buf[len] = ((b % 2) + 48);
 		b = b / 2;
 	}
-	for (i = 0; buffer[i] != '\0'; i++)
+	for (j = 0; buf[j] != '\0'; j++)
 	{
-		_putchar(buffer[i]);
-		*(count) = *(count) + 1;
+		buffer[(*i)++] = buf[j];
 	}
-	free(buffer);
+	free(buf);
 }
 
 /**
- * u_id - prints an unsigned int argument in decimal
+ * u_id - stores an unsigned int variable converted to decimal in a buffer
  * @p: pointer to variable
  * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
  *
  * Return: void
  */
-void u_id(va_list *p, unsigned int *count)
+void u_id(va_list *p, char *buffer, unsigned int *i)
 {
-	unsigned int n, i, j, size, digit;
+	unsigned int n, k, j, size, digit;
 
 	n = va_arg(*(p), int);
 
 	if (n == 0)
-	{
-		_putchar(48);
-		*(count) = *(count) + 1;
-	}
+		buffer[(*i)++] = '0';
 
 	size = 0;
-	i = n;
-	while (i != 0)
+	k = n;
+	while (k != 0)
 	{
-		i = i / 10;
+		k = k / 10;
 		size++;
 	}
-	for (i = size; i > 0; i--)
+	for (k = size; k > 0; k--)
 	{
 		digit = n;
-		for (j = i; j > 1; j--)
-		{
+		for (j = k; j > 1; j--)
 			digit = digit / 10;
-		}
 		digit = digit % 10;
-		_putchar(digit + 48);
-		*(count) = *(count) + 1;
+		buffer[(*i)++] = digit + 48;
 	}
 }
 
 /**
- * o_id - prints an unsigned int argument in octal
+ * o_id - stores an unsigned int variable converted to octal in a buffer
  * @p: pointer to variable
  * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
  *
  * Return: void
  */
-void o_id(va_list *p, unsigned int *count)
+void o_id(va_list *p, char *buffer, unsigned int *i)
 {
-	unsigned int b, i;
-	char *buffer;
+	unsigned int b, k;
+	char *buf;
 	int len;
 
 	b = va_arg(*(p), unsigned int);
-	i = b;
+	k = b;
 	len = 0;
 
-	while (i != 0)
+	while (k != 0)
 	{
-		i = i / 8;
+		k = k / 8;
 		len++;
 	}
-	buffer = (char *)malloc((len + 1) * sizeof(char));
-	if (buffer == NULL)
+	buf = (char *)malloc((len + 1) * sizeof(char));
+	if (buf == NULL)
 		return;
-	buffer[len] = '\0';
+	buf[len] = '\0';
 	while (b != 0)
 	{
 		len--;
-		buffer[len] = ((b % 8) + 48);
+		buf[len] = ((b % 8) + 48);
 		b = b / 8;
 	}
-	for (i = 0; buffer[i] != '\0'; i++)
-	{
-		_putchar(buffer[i]);
-		*(count) = *(count) + 1;
-	}
-	free(buffer);
+	for (i = 0; buf[k] != '\0'; i++)
+		buffer[(*i)++] = buf[k];
+	free(buf);
 }
 
 /**
- * x_id - prints an unsigned int argument in hexadecimal (abcdef in lower case)
+ * x_id - stores an unsigned int variable converted to hexadecimal in a buffer
+ *        (abcdef in lower case)
  * @p: pointer to variable
  * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
  *
  * Return: void
  */
-void x_id(va_list *p, unsigned int *count)
+void x_id(va_list *p, char *buffer, unsigned int *i)
 {
-	unsigned int x, i;
-	char *buffer;
+	unsigned int x, k;
+	char *buf;
 	int len;
 
 	x = va_arg(*(p), unsigned int);
-	i = x;
+	k = x;
 	len = 0;
 
-	while (i != 0)
+	while (k != 0)
 	{
-		i = i / 16;
+		k = k / 16;
 		len++;
 	}
-	buffer = (char *)malloc((len + 1) * sizeof(char));
-	if (buffer == NULL)
+	buf = (char *)malloc((len + 1) * sizeof(char));
+	if (buf == NULL)
 		return;
-	buffer[len] = '\0';
+	buf[len] = '\0';
 	while (x != 0)
 	{
 		len--;
-		buffer[len] = ((x % 16) + 48);
+		buf[len] = ((x % 16) + 48);
 		x = x / 16;
 	}
-	for (i = 0; buffer[i] != '\0'; i++)
+	for (k = 0; buf[k] != '\0'; k++)
 	{
-		if (buffer[i] <= '9')
-		{
-			_putchar(buffer[i]);
-			*(count) = *(count) + 1;
-		}
-		else if (buffer[i] > '9')
-		{
-			_putchar(buffer[i] + 39);
-			*(count) = *(count) + 1;
-		}
+		if (buf[k] <= '9')
+			buffer[(*i)++] = buf[k];
+		else if (buf[k] > '9')
+			buffer[(*i)++] = buf[k] + 39;
 	}
-	free(buffer);
+	free(buf);
 }
 
 /**
- * X_id - prints an unsigned int argument in hexadecimal (ABCDEF in upper case)
+ * X_id - stores an unsigned int variable converted to hexadecimal in a buffer
+ *        (ABCDEF in upper case)
  * @p: pointer to variable
  * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
  *
  * Return: void
  */
-void X_id(va_list *p, unsigned int *count)
+void X_id(va_list *p, char *buffer, unsigned int *i)
 {
-	unsigned int x, i;
-	char *buffer;
+	unsigned int x, k;
+	char *buf;
 	int len;
 
 	x = va_arg(*(p), unsigned int);
-	i = x;
+	k = x;
 	len = 0;
 
-	while (i != 0)
+	while (k != 0)
 	{
-		i = i / 16;
+		k = k / 16;
 		len++;
 	}
-	buffer = (char *)malloc((len + 1) * sizeof(char));
-	if (buffer == NULL)
+	buf = (char *)malloc((len + 1) * sizeof(char));
+	if (buf == NULL)
 		return;
-	buffer[len] = '\0';
+	buf[len] = '\0';
 	while (x != 0)
 	{
 		len--;
-		buffer[len] = ((x % 16) + 48);
+		buf[len] = ((x % 16) + 48);
 		x = x / 16;
 	}
-	for (i = 0; buffer[i] != '\0'; i++)
+	for (k = 0; buf[k] != '\0'; k++)
 	{
-		if (buffer[i] <= '9')
-		{
-			_putchar(buffer[i]);
-			*(count) = *(count) + 1;
-		}
-		else if (buffer[i] > '9')
-		{
-			_putchar(buffer[i] + 7);
-			*(count) = *(count) + 1;
-		}
+		if (buf[k] <= '9')
+			buffer[(*i)++] = buf[k];
+		else if (buf[k] > '9')
+			buffer[(*i)++] = buf[k] + 7;
 	}
-	free(buffer);
+	free(buf);
 }
