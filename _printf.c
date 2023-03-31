@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <stddef.h>
 #include "main.h"
 /**
  * _printf - prints and formats strings and specifiers
@@ -11,7 +8,8 @@
 int _printf(const char *format, ...)
 {
 	va_list p;
-	unsigned int j, k, count = 0;
+	char buffer[1024];
+	unsigned int j, k, i = 0;
 	types type[] = {
 		{'c', c_id},
 		{'s', s_id},
@@ -34,8 +32,7 @@ int _printf(const char *format, ...)
 		{
 			if (format[j + 1] == '%')
 			{
-				_putchar('%');
-				count++;
+				buffer[i++] = '%';
 				j++;
 				continue;
 			}
@@ -43,7 +40,7 @@ int _printf(const char *format, ...)
 			{
 				if (format[j + 1] == type[k].type)
 				{
-					(*type[k].func)(&p, &count);
+					(*type[k].func)(&p, buffer, &i);
 					j++;
 					break;
 				}
@@ -51,10 +48,12 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(format[j]);
-			count++;
+			buffer[i++] = format[j];
 		}
 	}
+	buffer[i] = '\0';
+	write(1, buffer, i);
+	clean_buffer(buffer, i);
 	va_end(p);
-	return (count);
+	return (i);
 }
