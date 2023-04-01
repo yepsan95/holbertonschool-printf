@@ -9,7 +9,7 @@
  *
  * Return: void
  */
-void c_id(va_list *p, char *buffer, unsigned int *i)
+void c_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	char c;
 
@@ -26,7 +26,7 @@ void c_id(va_list *p, char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void s_id(va_list *p, char *buffer, unsigned int *i)
+void s_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	int j;
 	char *s;
@@ -34,8 +34,58 @@ void s_id(va_list *p, char *buffer, unsigned int *i)
 	s = va_arg(*(p), char *);
 
 	for (j = 0; s[j] != '\0'; j++)
-	{
 		buffer[(*i)++] = s[j];
+}
+
+/**
+ * S_id - stores a string variable in a buffer.
+ *        Non printable characters (0 < ASCII value < 32 or >= 127)
+ *        are printed this way: \x, followed by the ASCII code value in hexadecimal
+ *        (upper case - always 2 characters)
+ * @p: pointer to variable
+ * @count: counts the number of characters printed
+ * @buffer: buffer where the characters are stored
+ * @i: current index of the buffer to where the characters should be written
+ *
+ * Return: void
+ */
+void S_id(va_list *p, unsigned char *buffer, unsigned int *i)
+{
+	int j, n, k, digit;
+	unsigned char *s;
+	unsigned char buf[5];
+
+	buf[0] = 92;
+	buf[1] = 'x';
+	buf[2] = '0';
+	buf[3] = '0';
+	buf[4] = '\0';
+
+	s = va_arg(*(p), unsigned char *);
+
+	for (j = 0; s[j] != '\0'; j++)
+	{
+		if (s[j] < 32 || s[j] >= 127)
+		{
+			k = s[j];
+			digit = k % 16;
+			if (digit > 9)
+				buf[3] = digit + 55;
+			else
+				buf[3] = digit + 48;
+			k = k / 16;
+			digit = k % 16;
+			if (digit > 9)
+				buf[2] = digit + 55;
+			else
+				buf[2] = digit + 48;
+			for (n = 0; n <= 3; n++)
+				buffer[(*i)++] = buf[n];
+		}
+		else
+		{
+			buffer[(*i)++] = s[j];
+		}
 	}
 }
 
@@ -48,7 +98,7 @@ void s_id(va_list *p, char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void d_id(va_list *p, char *buffer, unsigned int *i)
+void d_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	int n, k, j, size, digit;
 
@@ -89,7 +139,7 @@ void d_id(va_list *p, char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void b_id(va_list *p, char *buffer, unsigned int *i)
+void b_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	unsigned int b, j;
 	char *buf;
@@ -130,7 +180,7 @@ void b_id(va_list *p, char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void u_id(va_list *p, char *buffer, unsigned int *i)
+void u_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	unsigned int n, k, j, size, digit;
 
@@ -165,7 +215,7 @@ void u_id(va_list *p, char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void o_id(va_list *p, char *buffer, unsigned int *i)
+void o_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	unsigned int b, k;
 	char *buf;
@@ -205,7 +255,7 @@ void o_id(va_list *p, char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void x_id(va_list *p, char *buffer, unsigned int *i)
+void x_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	unsigned int x, k;
 	char *buf;
@@ -250,7 +300,7 @@ void x_id(va_list *p, char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void X_id(va_list *p, char *buffer, unsigned int *i)
+void X_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	unsigned int x, k;
 	char *buf;
