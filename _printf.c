@@ -8,7 +8,7 @@
 int _printf(const char *format, ...)
 {
 	va_list p;
-	unsigned char buffer[1024];
+	unsigned char buffer[2048];
 	unsigned int j, k, i = 0;
 	types type[] = {
 		{'c', c_id},
