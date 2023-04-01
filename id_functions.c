@@ -149,6 +149,11 @@ void b_id(va_list *p, unsigned char *buffer, unsigned int *i)
 	j = b;
 	len = 0;
 
+	if (b == 0)
+	{
+		buffer[(*i)++] = '0';
+		return;
+	}
 	while (j != 0)
 	{
 		j = j / 2;
