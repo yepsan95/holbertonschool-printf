@@ -8,11 +8,12 @@
 int _printf(const char *format, ...)
 {
 	va_list p;
-	char buffer[1024];
+	unsigned char buffer[1024];
 	unsigned int j, k, i = 0;
 	types type[] = {
 		{'c', c_id},
 		{'s', s_id},
+		{'S', S_id},
 		{'d', d_id},
 		{'i', d_id},
 		{'b', b_id},
