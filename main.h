@@ -25,5 +25,6 @@ void u_id(va_list *p, unsigned char *buffer, unsigned int *i);
 void o_id(va_list *p, unsigned char *buffer, unsigned int *i);
 void x_id(va_list *p, unsigned char *buffer, unsigned int *i);
 void X_id(va_list *p, unsigned char *buffer, unsigned int *i);
+void p_id(va_list *p, unsigned char *buffer, unsigned int *i);
 
 #endif
