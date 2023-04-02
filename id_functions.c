@@ -247,7 +247,7 @@ void o_id(va_list *p, unsigned char *buffer, unsigned int *i)
 		buf[len] = ((b % 8) + 48);
 		b = b / 8;
 	}
-	for (i = 0; buf[k] != '\0'; i++)
+	for (k = 0; buf[k] != '\0'; k++)
 		buffer[(*i)++] = buf[k];
 	free(buf);
 }
