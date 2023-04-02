@@ -30,7 +30,7 @@ void s_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
 	int j;
 	char *s;
-	char null[7] = "(null)"
+	char null[7] = "(null)";
 
 	s = va_arg(*(p), char *);
 
