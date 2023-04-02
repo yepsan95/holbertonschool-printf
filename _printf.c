@@ -8,8 +8,10 @@
 int _printf(const char *format, ...)
 {
 	va_list p;
+	unsigned int j, f, k, i = 0;
 	unsigned char buffer[2048];
-	unsigned int j, k, i = 0;
+	char flags[] = "#+0- ";
+	char flags_id[6];
 	types type[] = {
 		{'c', c_id},
 		{'s', s_id},
@@ -25,6 +27,7 @@ int _printf(const char *format, ...)
 		{'\0', NULL}
 		};
 
+	f = 0;
 	if (format == NULL)
 		return (-1);
 	va_start(p, format);
@@ -42,11 +45,27 @@ int _printf(const char *format, ...)
 			{
 				return (-1);
 			}
+			while (format[j + 1] == '#' || format[j + 1] == '+' || 
+					format[j + 1] == '0' || format[j + 1] == '-'
+					|| format[j + 1] == ' ')
+			{
+				for (k = 0; flags[k] != '\0'; k++)
+				{
+					if (format[j + 1] == flags[k])
+					{
+						flags_id[f] = flags[k];
+						f++;
+						j++;
+						break;
+					}
+				}
+			}
+			flags_id[f] = '\0';
 			for (k = 0; type[k].type != '\0'; k++)
 			{
 				if (format[j + 1] == type[k].type)
 				{
-					(*type[k].func)(&p, buffer, &i);
+					(*type[k].func)(&p, buffer, &i, flags_id);
 					j++;
 					break;
 				}
