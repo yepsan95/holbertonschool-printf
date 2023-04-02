@@ -7,10 +7,10 @@
 #include <stddef.h>
 #include <unistd.h>
 
-typedef struct Types {
-
-        char type;
-        void (*func)(va_list *, unsigned char *, unsigned int *);
+typedef struct Types
+{
+	char type;
+	void (*func)(va_list *, unsigned char *, unsigned int *);
 } types;
 int _putchar(char c);
 int _printf(const char *format, ...);
