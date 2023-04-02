@@ -365,17 +365,19 @@ void X_id(va_list *p, unsigned char *buffer, unsigned int *i)
  */
 void p_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
-	unsigned int x, k;
+	unsigned int x, k, j;
 	char *buf;
+	char null[] = "(nil)";
 	int len;
 
 	x = va_arg(*(p), unsigned int);
 	k = x;
 	len = 0;
 
-	if (k == 0)
+	if (x == 0)
 	{
-		buffer[(*i)++] = '0';
+		for (j = 0; null[j] != '\0'; j++)
+			buffer[(*i)++] = null[j];
 		return;
 	}
 	while (k != 0)
@@ -395,12 +397,12 @@ void p_id(va_list *p, unsigned char *buffer, unsigned int *i)
 		buf[len] = ((x % 16) + 48);
 		x = x / 16;
 	}
-	for (k = 0; buf[k] != '\0'; k++)
+	for (j = 0; buf[j] != '\0'; j++)
 	{
-		if (buf[k] <= '9')
-			buffer[(*i)++] = buf[k];
-		else if (buf[k] > '9')
-			buffer[(*i)++] = buf[k] + 39;
+		if (buf[j] <= '9')
+			buffer[(*i)++] = buf[j];
+		else if (buf[j] > '9')
+			buffer[(*i)++] = buf[j] + 39;
 	}
 	free(buf);
 }
