@@ -34,7 +34,7 @@ void s_id(va_list *p, unsigned char *buffer, unsigned int *i)
 
 	s = va_arg(*(p), char *);
 
-	if (s = NULL)
+	if (s == NULL)
 	{
 		for (j = 0; null[j] != '\0'; j++)
 			buffer[(*i)++] = null[j];
