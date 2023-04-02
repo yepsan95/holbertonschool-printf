@@ -21,6 +21,7 @@ int _printf(const char *format, ...)
 		{'o', o_id},
 		{'x', x_id},
 		{'X', X_id},
+		{'p', p_id},
 		{'\0', NULL}
 		};
 
