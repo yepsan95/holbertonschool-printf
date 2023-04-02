@@ -50,6 +50,8 @@ int _printf(const char *format, ...)
 					break;
 				}
 			}
+			if (type[k].type == '\0')
+				buffer[i++] = format[j];
 		}
 		else
 		{
