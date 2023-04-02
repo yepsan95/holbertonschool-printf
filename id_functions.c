@@ -3,7 +3,6 @@
 /**
  * c_id - stores a char variable in a buffer
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
@@ -20,7 +19,6 @@ void c_id(va_list *p, unsigned char *buffer, unsigned int *i)
 /**
  * s_id - stores a string variable in a buffer
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
@@ -52,7 +50,6 @@ void s_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *        are printed this way: \x, followed by the ASCII code value in hexadecimal
  *        (upper case - always 2 characters)
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
@@ -101,7 +98,6 @@ void S_id(va_list *p, unsigned char *buffer, unsigned int *i)
 /**
  * d_id - stores an integer variable in a buffer
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
@@ -142,7 +138,6 @@ void d_id(va_list *p, unsigned char *buffer, unsigned int *i)
 /**
  * b_id - stores an unsigned int variable converted to binary in a buffer
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
@@ -188,7 +183,6 @@ void b_id(va_list *p, unsigned char *buffer, unsigned int *i)
 /**
  * u_id - stores an unsigned int variable converted to decimal in a buffer
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
@@ -223,7 +217,6 @@ void u_id(va_list *p, unsigned char *buffer, unsigned int *i)
 /**
  * o_id - stores an unsigned int variable converted to octal in a buffer
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
@@ -263,7 +256,6 @@ void o_id(va_list *p, unsigned char *buffer, unsigned int *i)
  * x_id - stores an unsigned int variable converted to hexadecimal in a buffer
  *        (abcdef in lower case)
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
@@ -308,7 +300,6 @@ void x_id(va_list *p, unsigned char *buffer, unsigned int *i)
  * X_id - stores an unsigned int variable converted to hexadecimal in a buffer
  *        (ABCDEF in upper case)
  * @p: pointer to variable
- * @count: counts the number of characters printed
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
  *
