@@ -3,7 +3,7 @@
  * _printf - prints and formats strings and specifiers
  * @format: the format of the string containing (or not) the variables
  *
- * Return: the number of characters printed
+ * Return: the number of characters printed, -1 on error
  */
 int _printf(const char *format, ...)
 {
@@ -46,6 +46,8 @@ int _printf(const char *format, ...)
 					break;
 				}
 			}
+			if (type[k].type == '\0')
+				return (-1);
 		}
 		else
 		{
