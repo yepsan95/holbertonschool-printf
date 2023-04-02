@@ -324,7 +324,11 @@ void X_id(va_list *p, unsigned char *buffer, unsigned int *i)
 	x = va_arg(*(p), unsigned int);
 	k = x;
 	len = 0;
-
+	if (k == 0)
+	{
+		buffer[(*i)++] = '0';
+		return;
+	}
 	while (k != 0)
 	{
 		k = k / 16;
