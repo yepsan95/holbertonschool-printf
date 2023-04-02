@@ -37,6 +37,10 @@ int _printf(const char *format, ...)
 				j++;
 				continue;
 			}
+			else if (format[j + 1] == '\0')
+			{
+				return (-1);
+			}
 			for (k = 0; type[k].type != '\0'; k++)
 			{
 				if (format[j + 1] == type[k].type)
@@ -46,8 +50,6 @@ int _printf(const char *format, ...)
 					break;
 				}
 			}
-			if (type[k].type == '\0')
-				return (-1);
 		}
 		else
 		{
