@@ -47,8 +47,8 @@ void s_id(va_list *p, unsigned char *buffer, unsigned int *i)
 /**
  * S_id - stores a string variable in a buffer.
  *        Non printable characters (0 < ASCII value < 32 or >= 127)
- *        are printed this way: \x, followed by the ASCII code value in hexadecimal
- *        (upper case - always 2 characters)
+ *        are printed this way: \x, followed by the ASCII code value
+ *        in hexadecimal (upper case - always 2 characters)
  * @p: pointer to variable
  * @buffer: buffer where the characters are stored
  * @i: current index of the buffer to where the characters should be written
