@@ -365,12 +365,12 @@ void X_id(va_list *p, unsigned char *buffer, unsigned int *i)
  */
 void p_id(va_list *p, unsigned char *buffer, unsigned int *i)
 {
-	unsigned int x, k, j;
+	unsigned long int x, k, j;
 	char *buf;
 	char null[] = "(nil)";
 	int len;
 
-	x = va_arg(*(p), unsigned int);
+	x = va_arg(*(p), unsigned long int);
 	k = x;
 	len = 0;
 
