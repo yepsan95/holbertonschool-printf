@@ -8,9 +8,15 @@
  *
  * Return: void
  */
-void c_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void c_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
 	char c;
+	int j;
+
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		continue;
+	}
 
 	c = va_arg(*(p), int);
 	buffer[(*i)++] = c;
@@ -24,14 +30,18 @@ void c_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void s_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void s_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
-	int j;
+	int j, k;
 	char *s;
 	char null[7] = "(null)";
 
 	s = va_arg(*(p), char *);
 
+	for (k = 0; flags[k] != '\0'; k++)
+	{
+		continue;
+	}
 	if (s == NULL)
 	{
 		for (j = 0; null[j] != '\0'; j++)
@@ -55,7 +65,7 @@ void s_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void S_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void S_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
 	int j, n, k, digit;
 	unsigned char *s;
@@ -69,6 +79,10 @@ void S_id(va_list *p, unsigned char *buffer, unsigned int *i)
 
 	s = va_arg(*(p), unsigned char *);
 
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		continue;
+	}
 	for (j = 0; s[j] != '\0'; j++)
 	{
 		if (s[j] < 32 || s[j] >= 127)
@@ -103,12 +117,28 @@ void S_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void d_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void d_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
 	int n, k, j, size, digit;
 
 	n = va_arg(*(p), int);
 
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		if (flags[j] == '+' && n >= 0)
+		{
+			k = 1;;
+			break;
+		}
+		else if (flags[j] == ' ' && n >= 0)
+		{
+			k = 0;
+		}
+	}
+	if (k == 1)
+		buffer[(*i)++] = '+';
+	else if (k == 0)
+		buffer[(*i)++] = ' ';
 	if (n == 0)
 		buffer[(*i)++] = '0';
 	else if (n < 0)
@@ -143,9 +173,9 @@ void d_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void b_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void b_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
-	unsigned int b, j;
+	unsigned int b, j, k;
 	char *buf;
 	int len;
 
@@ -157,6 +187,10 @@ void b_id(va_list *p, unsigned char *buffer, unsigned int *i)
 	{
 		buffer[(*i)++] = '0';
 		return;
+	}
+	for (k = 0; flags[k] != '\0'; k++)
+	{
+		continue;
 	}
 	while (j != 0)
 	{
@@ -188,7 +222,7 @@ void b_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void u_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void u_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
 	unsigned int n, k, j, size, digit;
 
@@ -196,7 +230,10 @@ void u_id(va_list *p, unsigned char *buffer, unsigned int *i)
 
 	if (n == 0)
 		buffer[(*i)++] = '0';
-
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		continue;
+	}
 	size = 0;
 	k = n;
 	while (k != 0)
@@ -222,11 +259,13 @@ void u_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void o_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void o_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
 	unsigned int b, k;
+	int j;
 	char *buf;
 	int len;
+
 
 	b = va_arg(*(p), unsigned int);
 	k = b;
@@ -236,6 +275,14 @@ void o_id(va_list *p, unsigned char *buffer, unsigned int *i)
 	{
 		buffer[(*i)++] = '0';
 		return;
+	}
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		if (flags[j] == '#')
+		{
+			buffer[(*i)++] = '0';
+			break;
+		}	
 	}
 	while (k != 0)
 	{
@@ -266,9 +313,9 @@ void o_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void x_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void x_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
-	unsigned int x, k;
+	unsigned int x, k, j;
 	char *buf;
 	int len;
 
@@ -280,6 +327,15 @@ void x_id(va_list *p, unsigned char *buffer, unsigned int *i)
 	{
 		buffer[(*i)++] = '0';
 		return;
+	}
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		if (flags[j] == '#')
+		{
+			buffer[(*i)++] = '0';
+			buffer[(*i)++] = 'x';
+			break;
+		}	
 	}
 	while (k != 0)
 	{
@@ -315,9 +371,9 @@ void x_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void X_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void X_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
-	unsigned int x, k;
+	unsigned int x, k, j;
 	char *buf;
 	int len;
 
@@ -328,6 +384,15 @@ void X_id(va_list *p, unsigned char *buffer, unsigned int *i)
 	{
 		buffer[(*i)++] = '0';
 		return;
+	}
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		if (flags[j] == '#')
+		{
+			buffer[(*i)++] = '0';
+			buffer[(*i)++] = 'x';
+			break;
+		}	
 	}
 	while (k != 0)
 	{
@@ -363,7 +428,7 @@ void X_id(va_list *p, unsigned char *buffer, unsigned int *i)
  *
  * Return: void
  */
-void p_id(va_list *p, unsigned char *buffer, unsigned int *i)
+void p_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
 	unsigned long int x, k, j;
 	char *buf;
@@ -379,6 +444,11 @@ void p_id(va_list *p, unsigned char *buffer, unsigned int *i)
 		for (j = 0; null[j] != '\0'; j++)
 			buffer[(*i)++] = null[j];
 		return;
+	}
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		if (flags[j] == '#')
+			continue;
 	}
 	while (k != 0)
 	{
