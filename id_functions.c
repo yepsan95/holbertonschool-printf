@@ -132,12 +132,12 @@ void d_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 		}
 		else if (flags[j] == ' ' && n >= 0)
 		{
-			k = 0;
+			k = -1;
 		}
 	}
 	if (k == 1)
 		buffer[(*i)++] = '+';
-	else if (k == 0)
+	else if (k == -1)
 		buffer[(*i)++] = ' ';
 	if (n == 0)
 		buffer[(*i)++] = '0';
