@@ -71,7 +71,17 @@ int _printf(const char *format, ...)
 				}
 			}
 			if (type[k].type == '\0')
+			{
+				if (format[j + 1] == '%')
+				{
+					buffer[i++] = format[j + 1];
+					j++;
+				}
+				else
+				{
 				buffer[i++] = format[j];
+				}
+			}
 		}
 		else
 		{
