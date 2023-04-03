@@ -390,7 +390,7 @@ void X_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 		if (flags[j] == '#')
 		{
 			buffer[(*i)++] = '0';
-			buffer[(*i)++] = 'x';
+			buffer[(*i)++] = 'X';
 			break;
 		}	
 	}
