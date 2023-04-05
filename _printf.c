@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _printf - prints and formats strings and specifiers
  * @format: the format of the string containing (or not) the variables
@@ -45,6 +46,12 @@ int _printf(const char *format, ...)
 			{
 				return (-1);
 			}
+			else if (format[j + 1] == ' ' && format[j + 2] == '\0')
+			{
+				buffer[i++] = '%';
+				buffer[i++] = ' ';
+				break;
+			}
 			while (format[j + 1] == '#' || format[j + 1] == '+' || 
 					format[j + 1] == '0' || format[j + 1] == '-'
 					|| format[j + 1] == ' ')
@@ -74,9 +81,9 @@ int _printf(const char *format, ...)
 			{
 				if (format[j + 1] == '%')
 				{
-					buffer[i++] = format[j + 1];
+					buffer[i++] = '%';
 					j++;
-				}
+			}
 				else
 				{
 				buffer[i++] = format[j];
