@@ -41,6 +41,7 @@ typedef struct Flags
 int _putchar(char c);
 int _printf(const char *format, ...);
 void clean_buffer(unsigned char *buffer, unsigned int i);
+void store_flags(const char *format,char *flags_id, unsigned int *j);
 
 void c_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags);
 void s_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags);

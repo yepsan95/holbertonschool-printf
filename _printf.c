@@ -9,9 +9,8 @@
 int _printf(const char *format, ...)
 {
 	va_list p;
-	unsigned int j, f, k, i = 0;
+	unsigned int j, k, i = 0;
 	unsigned char buffer[2048];
-	char flags[] = "#+0- ";
 	char flags_id[6];
 	types type[] = {
 		{'c', c_id},
@@ -28,7 +27,6 @@ int _printf(const char *format, ...)
 		{'\0', NULL}
 		};
 
-	f = 0;
 	if (format == NULL)
 		return (-1);
 	va_start(p, format);
@@ -52,22 +50,7 @@ int _printf(const char *format, ...)
 				buffer[i++] = ' ';
 				break;
 			}
-			while (format[j + 1] == '#' || format[j + 1] == '+' || 
-					format[j + 1] == '0' || format[j + 1] == '-'
-					|| format[j + 1] == ' ')
-			{
-				for (k = 0; flags[k] != '\0'; k++)
-				{
-					if (format[j + 1] == flags[k])
-					{
-						flags_id[f] = flags[k];
-						f++;
-						j++;
-						break;
-					}
-				}
-			}
-			flags_id[f] = '\0';
+			store_flags(format, flags_id, &j);
 			for (k = 0; type[k].type != '\0'; k++)
 			{
 				if (format[j + 1] == type[k].type)
@@ -100,4 +83,27 @@ int _printf(const char *format, ...)
 	clean_buffer(buffer, i);
 	va_end(p);
 	return (i);
+}
+
+void store_flags(const char *format, char *flags_id, unsigned int *j)
+{
+	int k, f = 0;
+	char flags[] = "#+0- ";
+
+	while (format[(*j) + 1] == '#' || format[(*j) + 1] == '+' ||
+			format[(*j) + 1] == '0' || format[(*j) + 1] == '-'
+			|| format[(*j) + 1] == ' ')
+	{
+		for (k = 0; flags[k] != '\0'; k++)
+		{
+			if (format[(*j) + 1] == flags[k])
+			{
+				flags_id[f] = flags[k];
+				f++;
+				(*j)++;
+				break;
+			}
+		}
+	}
+	flags_id[f] = '\0';
 }
