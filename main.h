@@ -23,25 +23,13 @@ typedef struct Types
 	void (*func)(va_list *, unsigned char *, unsigned int *, char *);
 } types;
 
-/**
- * struct Flags - structure for each flag of the _printf function
- * @flag: specifier character
- * @func: function that will be called when the flag matches
- *
- * Description: this structure will be used to create an array of structures
- *              on which each element will correspond to a flag character
- *              and the function that should be called when that character
- *              is found in the format string of the _printf function
- */
-typedef struct Flags
-{
-	char flag;
-	int (*func);
-} flags;
 int _putchar(char c);
 int _printf(const char *format, ...);
+void call_function(const char *format, va_list *p, unsigned int *j,
+		unsigned int *i, unsigned char *buffer, char *flags_id);
+void store_flags(const char *format, char *flags_id, unsigned int *j);
+int special_cases(const char *format, unsigned int *j);
 void clean_buffer(unsigned char *buffer, unsigned int i);
-void store_flags(const char *format,char *flags_id, unsigned int *j);
 
 void c_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags);
 void s_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags);
