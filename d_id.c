@@ -14,26 +14,31 @@ void d_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 	int n, k, j, size, digit;
 
 	n = va_arg(*(p), int);
-	for (j = 0; flags[j] != '\0'; j++)
+	if (n >= 0)
 	{
-		if (flags[j] == '+' && n >= 0)
+		for (j = 0; flags[j] != '\0'; j++)
 		{
-			k = 1;
-			break;
+			if (flags[j] == '+')
+			{
+				k = 1;
+				break;
+			}
+			else if (flags[j] == ' ')
+			{
+				k = -1;
+			}
 		}
-		else if (flags[j] == ' ' && n >= 0)
-		{
-			k = -1;
-		}
+		if (k == 1)
+			buffer[(*i)++] = '+';
+		else if (k == -1)
+			buffer[(*i)++] = ' ';
+		if (n == 0)
+			buffer[(*i)++] = '0';
 	}
-	if (k == 1)
-		buffer[(*i)++] = '+';
-	else if (k == -1)
-		buffer[(*i)++] = ' ';
-	if (n == 0)
-		buffer[(*i)++] = '0';
 	else if (n < 0)
+	{
 		buffer[(*i)++] = '-';
+	}
 	size = 0;
 	k = n;
 	while (k != 0)
