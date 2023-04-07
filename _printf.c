@@ -147,5 +147,4 @@ int special_cases(const char *format,
 		return (-1);
 	else
 		return (0);
-	
 }
