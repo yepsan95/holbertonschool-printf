@@ -2,10 +2,10 @@
 
 ### Clone the repository
 
-_git clone https://github.com/yepsan95/holbertonschool-printf.git_
+**git clone https://github.com/yepsan95/holbertonschool-printf.git**
 
 ### Compile the program
 
 Create a main.c file  where you call the \_printf() function
 
-_gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format \*.c_
+**gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format \*.c**
