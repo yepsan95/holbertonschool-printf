@@ -12,26 +12,14 @@
  */
 void x_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
-	unsigned int x, k, j;
+	unsigned int x, k;
 	char *buf;
 	int len = 0;
 
 	x = va_arg(*(p), unsigned int);
-	k = x;
-	if (k == 0)
-	{
-		buffer[(*i)++] = '0';
+	if (check_flags_x(x, flags, buffer, i) == -1)
 		return;
-	}
-	for (j = 0; flags[j] != '\0'; j++)
-	{
-		if (flags[j] == '#')
-		{
-			buffer[(*i)++] = '0';
-			buffer[(*i)++] = 'x';
-			break;
-		}
-	}
+	k = x;
 	while (k != 0)
 	{
 		k = k / 16;
@@ -55,4 +43,36 @@ void x_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 			buffer[(*i)++] = buf[k] + 39;
 	}
 	free(buf);
+}
+
+/**
+ * check_flags_x - checks the flags in a 'x' specifier and performs the
+ *               corresponding actions for each case
+ * @x: the number to be printed
+ * @flags: string containing the flags in the specifier
+ * @buffer: buffer that holds the characters to be printed
+ * @i: index of the current position being printed in the buffer
+ *
+ * Return: -1 in case of error, 0 otherwise
+ */
+int check_flags_x(unsigned int x, char *flags,
+		unsigned char *buffer, unsigned int *i)
+{
+	unsigned int j;
+
+	if (x == 0)
+	{
+		buffer[(*i)++] = '0';
+		return (-1);
+	}
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		if (flags[j] == '#')
+		{
+			buffer[(*i)++] = '0';
+			buffer[(*i)++] = 'x';
+			break;
+		}
+	}
+	return (0);
 }

@@ -14,24 +14,14 @@ void p_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
 	unsigned long int x, k, j;
 	char *buf;
-	char null[] = "(nil)";
 	int len;
 
 	x = va_arg(*(p), unsigned long int);
 	k = x;
 	len = 0;
 
-	if (x == 0)
-	{
-		for (j = 0; null[j] != '\0'; j++)
-			buffer[(*i)++] = null[j];
+	if (check_flags_p(x, buffer, i, flags) == -1)
 		return;
-	}
-	for (j = 0; flags[j] != '\0'; j++)
-	{
-		if (flags[j] == '#')
-			continue;
-	}
 	while (k != 0)
 	{
 		k = k / 16;
@@ -57,4 +47,33 @@ void p_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 			buffer[(*i)++] = buf[j] + 39;
 	}
 	free(buf);
+}
+/**
+ * check_flags_p - checks the flags for a 'p' conversion character
+ *                 and performs the corresponding actions
+ * @x: value of the pointer variable to be printed
+ * @buffer: buffer that holds the characters to be printed
+ * @i: current index in the buffer
+ * @flags: string containing the flags in the specifier
+ *
+ * Return: -1 in case of error, 0 otherwise
+ */
+int check_flags_p(unsigned long int x, unsigned char *buffer,
+		unsigned int *i, char *flags)
+{
+	int j;
+	char null[] = "(nil)";
+
+	if (x == 0)
+	{
+		for (j = 0; null[j] != '\0'; j++)
+			buffer[(*i)++] = null[j];
+		return (-1);
+	}
+	for (j = 0; flags[j] != '\0'; j++)
+	{
+		if (flags[j] == '#')
+			continue;
+	}
+	return (0);
 }

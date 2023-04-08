@@ -12,27 +12,16 @@
  */
 void X_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags)
 {
-	unsigned int x, k, j;
+	unsigned int x, k;
 	char *buf;
 	int len;
 
 	x = va_arg(*(p), unsigned int);
 	k = x;
 	len = 0;
-	if (k == 0)
-	{
-		buffer[(*i)++] = '0';
+
+	if (check_flags_x(x, flags, buffer, i) == -1)
 		return;
-	}
-	for (j = 0; flags[j] != '\0'; j++)
-	{
-		if (flags[j] == '#')
-		{
-			buffer[(*i)++] = '0';
-			buffer[(*i)++] = 'X';
-			break;
-		}
-	}
 	while (k != 0)
 	{
 		k = k / 16;

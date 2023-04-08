@@ -29,6 +29,10 @@ void call_function(const char *format, va_list *p, unsigned int *j,
 		unsigned int *i, unsigned char *buffer, char *flags_id);
 void store_flags(const char *format, char *flags_id, unsigned int *j);
 int special_cases(const char *format, unsigned int *j);
+void check_flags_d(int n, char *flags, unsigned char *buffer, unsigned int *i);
+int check_flags_p(unsigned long int x, unsigned char *buffer,
+		unsigned int *i, char *flags);
+int check_flags_x(unsigned int x, char *flags, unsigned char *buffer, unsigned int *i);
 void clean_buffer(unsigned char *buffer, unsigned int i);
 
 void c_id(va_list *p, unsigned char *buffer, unsigned int *i, char *flags);
