@@ -1,10 +1,10 @@
-##This is a repository for Holberton School's Project 'C - printf'
+## This is a repository for Holberton School's Project 'C - printf'
 
-####Clone the repository
+#### Clone the repository
 
-git clone https://github.com/yepsan95/holbertonschool-printf.git
+*git clone https://github.com/yepsan95/holbertonschool-printf.git*
 
-####Compile the program
+#### Compile the program
 
 Create a main.c file  where you call the \_printf() function
 
