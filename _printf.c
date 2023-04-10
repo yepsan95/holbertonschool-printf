@@ -28,12 +28,6 @@ int _printf(const char *format, ...)
 				j++;
 				continue;
 			}
-			else if (format[j + 1] == ' ' && format[j + 2] == '\0')
-			{
-				buffer[i++] = '%';
-				buffer[i++] = ' ';
-				break;
-			}
 			store_flags(format, flags_id, &j);
 			call_function(format, &p, &j, &i, buffer, flags_id);
 		}
@@ -120,16 +114,20 @@ void call_function(const char *format, va_list *p, unsigned int *j,
 	}
 	if (type[k].type == '\0')
 	{
-		if (format[(*j) + 1] == '%')
+		if (format[(*j)] == '%')
 		{
 			buffer[(*i)++] = '%';
-			(*j)++;
+		}
+		else if (format[(*j)] == ' ')
+		{
+			buffer[(*i)++] = '%';
+			buffer[(*i)++] = ' ';
 		}
 		else
-			{
+		{
 			buffer[(*i)++] = format[(*j)];
-			}
 		}
+	}
 }
 
 /**
